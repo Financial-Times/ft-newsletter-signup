@@ -6,3 +6,6 @@ all: $(LIB_FILES)
 lib/%.js: src/%.js
 	mkdir -p $(@D)
 	node_modules/.bin/babel $< -o $@
+
+verify:
+	node_modules/.bin/eslint . *.js

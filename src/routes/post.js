@@ -14,7 +14,7 @@ export default function (req, res, next) {
 		category: 'light-signup',
 		product: req.body && req.body.source ? req.body.source : null,
 		cookies,
-		ua,
+		ua
 	});
 
 	logger.info(req.body);
@@ -67,20 +67,20 @@ export default function (req, res, next) {
 		return subscribe({
 			email: req.body.email,
 			mailingList: mailingList,
-			deviceId: extractDeviceId(cookies),
+			deviceId: extractDeviceId(cookies)
 		})
 		.catch(error => {
 			return Promise.reject(error);
 		});
 	}
 
-	function sendEmailAfter5am() {
+	function sendEmailAfter5am () {
 		const hourNow = new Date().getHours();
 		if (hourNow > 5) send(req.body.email);
 		return Promise.resolve();
 	}
 
-	function sendStatus(response) {
+	function sendStatus (response) {
 		if(req.newsletterSignupPostNoResponse) {
 			res.locals.newsletterSignupStatus = response;
 			next();
