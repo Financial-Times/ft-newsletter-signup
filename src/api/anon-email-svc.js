@@ -4,11 +4,11 @@ import logger from '@financial-times/n-logger';
 
 const hostname = process.env.ANON_EMAIL_SVC_HOST || 'anon-email-svc-gw-eu-west-1-prod.memb.ft.com';
 
-export function call(pathname, opts) {
+export function call (pathname, opts) {
 	const endpoint = url.format({
 		hostname,
 		protocol: 'https',
-		pathname,
+		pathname
 	});
 
 	logger.info(`calling ${endpoint}`);
@@ -16,7 +16,7 @@ export function call(pathname, opts) {
 	return fetch(endpoint, opts);
 };
 
-export function send(email) {
+export function send (email) {
 	return call('/send', {
 		method: 'POST',
 		headers: {

@@ -4,11 +4,11 @@ import url from 'url';
 
 const hostname = process.env.ANON_EMAIL_LIST_HOST || 'anon-email-lists-eu-prod.herokuapp.com';
 
-export function call(pathname, body, method = 'POST') {
+export function call (pathname, body, method = 'POST') {
 	const endpoint = url.format({
 		hostname,
 		protocol: 'https',
-		pathname,
+		pathname
 	});
 
 	logger.info(`calling ${endpoint}`);
@@ -19,11 +19,11 @@ export function call(pathname, body, method = 'POST') {
 			'Content-Type': 'application/json',
 			'FT-Api-Key': process.env.ANON_EMAIL_LIST_API_KEY
 		},
-		body: body && JSON.stringify(body),
+		body: body && JSON.stringify(body)
 	});
 };
 
-export function subscribe({email, mailingList, deviceId}={}) {
+export function subscribe ({email, mailingList, deviceId}={}) {
 	logger.info(`anon-email-api subscribing ${email} (${deviceId}) to ${mailingList}`);
 
 	let status;
@@ -54,7 +54,7 @@ export function subscribe({email, mailingList, deviceId}={}) {
 	});
 };
 
-export function unsubscribe(user) {
+export function unsubscribe (user) {
 	logger.info(`anon-email-api unsubscribing ${user} via ${hostname}/user/${user}/unsubscribe`);
 
 	return call(`/user/${user}/unsubscribe`);
